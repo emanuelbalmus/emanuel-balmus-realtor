@@ -214,12 +214,10 @@ hr{border:0;border-top:1px solid var(--rule);margin:0;}
 /* ---------- Credential strip ---------- */
 .strip{border-block:1px solid var(--rule-soft);background:var(--wash);}
 .strip-in{
-  display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;padding-block:20px;
+  display:flex;flex-wrap:wrap;gap:10px 44px;align-items:baseline;padding-block:18px;
   font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--quiet);
 }
 .strip-in b{color:var(--signal);font-weight:500;}
-.strip-logo{height:26px;width:auto;flex:none;opacity:.88;}
-@media(max-width:620px){ .strip-logo{height:22px;} }
 
 /* ---------- Pull quote ---------- */
 .pull{max-width:880px;}
@@ -423,8 +421,7 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.6;}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(24px,4vw,48px);padding-bottom:32px;}
 @media(max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr;} }
 @media(max-width:480px){ .foot-grid{grid-template-columns:1fr;} }
-.foot-name{font-family:var(--serif);font-size:1.7rem;color:#fff;margin-bottom:12px;}
-.foot-logo{width:150px;height:auto;display:block;margin:0 0 14px;opacity:.9;}
+.foot-name{font-family:var(--serif);font-size:1.7rem;color:#fff;margin-bottom:10px;}
 .site-foot h3{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
   color:var(--quiet);margin-bottom:15px;}
 .foot-list{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
