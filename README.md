@@ -6,6 +6,8 @@ Static site. No build step, no dependencies, no framework. Edit the HTML and pus
 
 ```
 index.html        Homepage: hero, lead form, reviews, FAQ
+privacy.html      Privacy Policy
+terms.html        Terms and Conditions
 buyers.html       Buying a home: the long explainer, collapsible sections
 sellers.html      Selling a home: buyer-side insight, collapsible sections
 tools.html        Four working calculators
@@ -36,7 +38,7 @@ Check it works at that address before touching DNS.
 
 ## Pointing your Namecheap domain at it
 
-**Step 1. Edit `CNAME`.** It currently says `REPLACE-WITH-YOUR-DOMAIN.com`.
+**Step 1. Edit `CNAME`.** It currently says `emanuelbalmus.com`.
 Replace that with your actual domain, no `https://` and no trailing slash. One line, nothing else.
 
 **Step 2. In Namecheap**, open your domain → **Advanced DNS**. Delete the default
