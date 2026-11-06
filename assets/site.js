@@ -48,6 +48,20 @@
     }
   } catch (e) { /* tracking is optional */ }
 
+  /* Consent record. Captures the exact wording the visitor was shown, so the
+     submission itself is the evidence of what they agreed to. */
+  function recordConsent() {
+    var box = $("#tcpa"), copy = $("#tcpaText");
+    if ($("#consentFlag")) $("#consentFlag").value = box && box.checked ? "Yes" : "No";
+    if ($("#consentCopy") && copy) {
+      $("#consentCopy").value = (copy.innerText || copy.textContent || "")
+        .replace(/\s+/g, " ").trim();
+    }
+    if ($("#consentTime")) $("#consentTime").value = new Date().toISOString();
+    if ($("#consentPage")) $("#consentPage").value = location.href;
+  }
+  recordConsent();
+
   function park() {
     var top = card.getBoundingClientRect().top;
     if (top < 70 || top > window.innerHeight * 0.55) {
@@ -153,13 +167,16 @@
     e.preventDefault();
     if (!validate(3)) return;
     hide("#errSend");
+    recordConsent();
 
     var name = ($("#fname").value.trim() + " " + $("#lname").value.trim()).trim();
     var what = $("input[name='Looking To']:checked");
     var when = $("input[name='Timeline']:checked");
+    var consented = $("#tcpa") && $("#tcpa").checked;
     $("#subjField").value = "New lead: " + name +
       " | " + (what ? what.value : "") +
-      " | " + (when ? when.value : "");
+      " | " + (when ? when.value : "") +
+      " | " + (consented ? "SMS OK" : "NO AUTO SMS");
 
     var original = btn.innerHTML;
     btn.disabled = true;
