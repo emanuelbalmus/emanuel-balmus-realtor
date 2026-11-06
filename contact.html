@@ -139,6 +139,10 @@
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="Page Source" id="srcField" value="">
           <input type="hidden" name="Campaign" id="utmField" value="">
+          <input type="hidden" name="Consent Given" id="consentFlag" value="No">
+          <input type="hidden" name="Consent Language Shown" id="consentCopy" value="">
+          <input type="hidden" name="Consent Timestamp" id="consentTime" value="">
+          <input type="hidden" name="Consent Page" id="consentPage" value="">
 
           <section class="step on" data-step="1" aria-label="Step 1, what you need">
             <div class="fgroup">
@@ -304,13 +308,21 @@
               <label class="flabel" for="notes">Anything I should know? <span class="opt">(optional)</span></label>
               <textarea class="inp" id="notes" name="Notes" rows="3" placeholder="Lease ends in October, need a yard for two dogs, been turned down by two lenders already..."></textarea>
             </div>
+            <div class="fgroup">
+              <label class="consent">
+                <input type="checkbox" id="tcpa" name="SMS and Call Consent" value="Yes">
+                <span class="consent-box" aria-hidden="true"></span>
+                <span class="consent-text" id="tcpaText">I agree that Emanuel Balmus and The Perry Group, Real Broker, LLC, may call and text me at the number above about real estate services, including messages sent using an automated system or a prerecorded voice. Consent is not a condition of buying or selling a home or of getting an answer from me. Message frequency varies, up to 10 per month. Message and data rates may apply. Reply STOP to stop, HELP for help. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</span>
+              </label>
+            </div>
             <div class="step-nav">
               <button type="button" class="back" data-back="2">Back</button>
               <button type="submit" class="btn btn-solid" id="submitBtn">Send it over</button>
             </div>
             <p class="err" id="errSend">That did not send. Please call or text 202.568.3006 and I will take care of it.</p>
-            <p class="fineprint">Your information comes straight to me. I do not sell it, share it, or
-              add you to a drip campaign you did not ask for.</p>
+            <p class="fineprint">Checking that box is optional. Either way your message reaches me and
+              I reply using the method you picked above. Your information comes straight to me. I do
+              not sell it, share it, or add you to a drip campaign you did not ask for.</p>
           </section>
         </form>
       </div>
