@@ -10,16 +10,16 @@ privacy.html      Privacy Policy
 terms.html        Terms and Conditions
 buyers.html       Buying a home: the long explainer, collapsible sections
 sellers.html      Selling a home: buyer-side insight, collapsible sections
+results.html      Case studies: the three deals, written out in full
 tools.html        Four working calculators
 story.html        Why I do this
 contact.html      Contact details plus the same lead form
 assets/site.css   All styling for every page
 assets/site.js    Mobile nav and the 3-step lead form
 images/           Optimised photos, already web sized
-CNAME             Your custom domain (edit this, see below)
 .nojekyll         Tells GitHub Pages not to run Jekyll on these files
-robots.txt        Edit the sitemap URL before launch
-sitemap.xml       Edit all six URLs before launch
+robots.txt        Points crawlers at sitemap.xml
+sitemap.xml       All nine page URLs
 ```
 
 ## Putting it on GitHub Pages
@@ -36,51 +36,35 @@ sitemap.xml       Edit all six URLs before launch
 
 Check it works at that address before touching DNS.
 
-## Pointing your Namecheap domain at it
+## About the custom domain
 
-**Step 1. Edit `CNAME`.** It currently says `emanuelbalmus.com`.
-Replace that with your actual domain, no `https://` and no trailing slash. One line, nothing else.
+**There is deliberately no CNAME file in this package.** GitHub writes and manages that
+file itself when you set the custom domain under Settings -> Pages. A CNAME file shipped
+inside an upload is what caused the "improperly configured / InvalidDNSError" problem
+before: GitHub read the file, tried to resolve whatever was in it, and failed.
 
-**Step 2. In Namecheap**, open your domain → **Advanced DNS**. Delete the default
-parking records, then add these.
+Since emanuelbalmus.com is already connected, GitHub already has the right CNAME file in
+the repo. Uploading this package does not touch it, because an upload only adds or
+replaces the files it contains. Leave it alone and the domain keeps working.
 
-Four A records for the bare domain:
+If the domain ever does come disconnected, do not upload a CNAME file to fix it. Go to
+Settings -> Pages, type the domain into the Custom domain box, and save. That is the only
+place it should ever be set.
 
-| Type | Host | Value |
-|------|------|-------|
-| A Record | @ | 185.199.108.153 |
-| A Record | @ | 185.199.109.153 |
-| A Record | @ | 185.199.110.153 |
-| A Record | @ | 185.199.111.153 |
+## Already set
 
-One CNAME record for the www version:
-
-| Type | Host | Value |
-|------|------|-------|
-| CNAME Record | www | YOURUSERNAME.github.io. |
-
-**Step 3.** Back in GitHub under **Settings → Pages**, put your domain in the
-*Custom domain* box and save. Once the check passes, tick **Enforce HTTPS**.
-
-DNS usually takes under an hour but can take up to 24. If GitHub says the domain
-is not configured correctly, wait and re-check rather than changing things.
-
-## Before you launch, replace these
-
-- `CNAME` — your real domain
-- `robots.txt` — the sitemap URL
-- `sitemap.xml` — all six URLs
-- The `og:image` tag in each page's `<head>` should be the full
-  `https://yourdomain.com/images/...` URL, not a relative path, or link previews
-  will be blank when someone shares the site.
-- Confirm the phone number. Every page currently uses **202.568.3006**, carried over
-  from the old file.
+- `robots.txt` and `sitemap.xml` both point at emanuelbalmus.com.
+- Every page carries `og:` tags with absolute image URLs, so link previews work.
+- Every page carries `RealEstateAgent` JSON-LD with the license number.
+- Phone number on every page: **202.568.3006**.
+- Calendly: `https://calendly.com/emanuelbalmus/realestate`, in the footer of every
+  page, on both form success screens, on the contact page, and on the case studies page.
 
 ## Editing later
 
 Text lives directly in the HTML. Search for the sentence you want to change and
 change it. The footer disclosure, license number and brokerage name appear on every
-page, so if one changes, change it in all six files.
+page, so if one changes, change it in all nine files.
 
 Colours, type and spacing are all defined once at the top of `assets/site.css`
 under `:root`. Changing a value there changes it everywhere.
