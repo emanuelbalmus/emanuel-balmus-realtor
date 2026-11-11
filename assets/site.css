@@ -30,6 +30,13 @@
 
   --flag:#E27E76;
 
+  /* Photo sizing. Two heights for the whole site. Nothing is cropped:
+     photos keep their own proportions and are capped so they sit level
+     with the text beside them instead of towering over it. */
+  --fig-tall:470px;   /* a photo standing on its own */
+  --fig-pair:380px;   /* a photo set beside text */
+  --fig-wide:360px;   /* phone */
+
   --serif:'Cormorant Garamond','Hoefler Text',Didot,Georgia,'Times New Roman',serif;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 
@@ -253,26 +260,43 @@ hr{border:0;border-top:1px solid var(--rule);margin:0;}
 /* ---------- Split (image + text) ---------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4.5vw,64px);align-items:center;}
 .split-wide{grid-template-columns:1.15fr .85fr;}
-.split img{width:100%;border-radius:2px;}
-@media(max-width:860px){ .split,.split-wide{grid-template-columns:1fr;} }
+/* A tall photo beside text: let the photo column shrink to the photo,
+   so the two blocks sit next to each other instead of across a gap. */
+.split-portrait{grid-template-columns:auto 1fr;align-items:center;}
+.split-portrait > div{max-width:64ch;}
+.split img{
+  width:auto;max-width:100%;height:auto;max-height:var(--fig-pair);
+  border-radius:2px;display:block;margin-inline:0;
+}
+.split > figure{margin:0;}
+@media(max-width:860px){
+  .split,.split-wide{grid-template-columns:1fr;}
+  .split img{max-height:var(--fig-wide);}
+}
 
-/* ---------- Full-width figure band ---------- */
+/* ---------- Figure paired with text ---------- */
 .band-figure{margin:0;}
-.band-figure img{width:100%;height:auto;border-radius:2px;display:block;}
+.band-figure img{
+  width:auto;max-width:100%;height:auto;max-height:var(--fig-pair);
+  border-radius:2px;display:block;margin-inline:0;
+}
 .band-figure figcaption{margin-top:14px;max-width:60ch;}
+@media(max-width:860px){ .band-figure img{max-height:var(--fig-wide);} }
+
+/* Opt out of the height cap. Used once, for the case studies portrait. */
+.band-figure.full img{width:100%;max-height:none;}
+@media(max-width:860px){ .band-figure.full img{max-height:none;} }
 
 /* ---------- Photo row ---------- */
 .photo-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
 .photo-row figure{margin:0;overflow:hidden;border-radius:2px;}
 .photo-row img{
   width:100%;aspect-ratio:3/2;object-fit:cover;object-position:center 22%;
-  filter:grayscale(1) contrast(1.04);
-  transition:filter .5s var(--ease),transform .5s var(--ease);
+  transition:transform .5s var(--ease);
 }
 @media(hover:hover){
-  .photo-row figure:hover img{filter:grayscale(0) contrast(1);transform:scale(1.03);}
+  .photo-row figure:hover img{transform:scale(1.03);}
 }
-@media(hover:none){ .photo-row img{filter:none;} }
 .photo-row figcaption{margin-top:8px;}
 
 /* ---------- Disclosure list ---------- */
@@ -309,7 +333,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:0;}
 .prose h2{font-family:var(--serif);font-size:clamp(1.65rem,2.6vw,2.1rem);font-weight:400;
   color:#fff;margin:2.1em 0 .65em;}
 .prose figure{margin:2.6em 0;}
-.prose figure img{width:100%;height:auto;border-radius:2px;}
+.prose figure img{
+  width:auto;max-width:100%;height:auto;max-height:var(--fig-tall);
+  border-radius:2px;display:block;margin-inline:0;
+}
+@media(max-width:860px){ .prose figure img{max-height:var(--fig-wide);} }
 .prose figcaption{margin-top:10px;}
 
 /* ---------- Form card ---------- */
@@ -411,10 +439,18 @@ textarea.inp{resize:vertical;min-height:84px;line-height:1.6;}
 .js .live.off{display:none;}
 
 /* ---------- Closing CTA block ---------- */
-.cta-block{display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(26px,4vw,56px);align-items:center;}
+.cta-block{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(26px,4vw,56px);align-items:center;}
 .cta-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
-.cta-block figure img{width:100%;height:auto;border-radius:2px;}
-@media(max-width:800px){ .cta-block{grid-template-columns:1fr;} }
+.cta-block figure{margin:0;display:flex;justify-content:flex-end;}
+.cta-block figure img{
+  width:auto;max-width:100%;height:auto;max-height:var(--fig-pair);
+  border-radius:2px;display:block;
+}
+@media(max-width:800px){
+  .cta-block{grid-template-columns:1fr;}
+  .cta-block figure{justify-content:flex-start;}
+  .cta-block figure img{max-height:var(--fig-wide);}
+}
 
 /* ---------- Footer ---------- */
 .site-foot{
