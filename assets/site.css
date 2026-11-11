@@ -292,11 +292,14 @@ hr{border:0;border-top:1px solid var(--rule);margin:0;}
 .photo-row figure{margin:0;overflow:hidden;border-radius:2px;}
 .photo-row img{
   width:100%;aspect-ratio:3/2;object-fit:cover;object-position:center 22%;
-  transition:transform .5s var(--ease);
+  filter:grayscale(1) contrast(1.04);
+  transition:filter .5s var(--ease),transform .5s var(--ease);
 }
 @media(hover:hover){
-  .photo-row figure:hover img{transform:scale(1.03);}
+  .photo-row figure:hover img{filter:grayscale(0) contrast(1);transform:scale(1.03);}
 }
+/* Phones cannot hover, so they get full colour straight away. */
+@media(hover:none){ .photo-row img{filter:none;} }
 .photo-row figcaption{margin-top:8px;}
 
 /* ---------- Disclosure list ---------- */
